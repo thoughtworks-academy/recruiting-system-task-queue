@@ -2,4 +2,5 @@ default:
   port: 4000
   redisServerIp: '10.29.3.221'
   redisServerPort: '6379'
-  CIServer: '10.29.3.221:8080'
+  CIServer: 'http://10.29.3.221:8080'
+  nginxServer: 'http://10.29.3.221:8888/fs'

@@ -27,7 +27,13 @@ app.post('/tasks', (req, res) => {
   });
 });
 
-app.post('/task-result', (req, res) => {});
+app.post('/task-result', (req, res) => {
+  console.log(req.body);
+
+  res.send({
+    status: 200
+  })
+});
 
 app.listen(config.port, function () {
   console.log('App listening at http://localhost:' + config.port);
