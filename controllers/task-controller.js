@@ -5,6 +5,7 @@ var request = require('superagent');
 var async = require('async');
 var yamlConfig = require('node-yaml-config');
 var config = yamlConfig.load('./config/config.yml');
+var httpCode = require('../mixin/constant').httpCode;
 
 function TaskController () {}
 
@@ -26,10 +27,10 @@ TaskController.prototype.createTask = (req, res) => {
     })
     .end((err, response) => {
       if (err){
-        res.sendStatus(500);
+        res.sendStatus(httpCode.INTERNAL_SERVER_ERROR);
       }else {
         res.send({
-          status: 200
+          status: httpCode.OK
         });
       }
     });
@@ -41,7 +42,7 @@ TaskController.prototype.result = (req, res) => {
   async.waterfall([
     (done) => {
       client.get(req.params.homeworkName, (err, reply) => {
-        done(err, reply)
+        done(err, reply);
       });
     },
     (reply, done) => {
@@ -55,18 +56,18 @@ TaskController.prototype.result = (req, res) => {
         .set('Content-Type', 'application/json')
         .send({
           result: req.body.result,
-          job_name: req.body.job_name,
-          build_number: req.body.build_number
+          jobName: req.body.jobName,
+          buildNumber: req.body.buildNumber
         })
         .end(done);
     }
   ],(err, result) => {
     if(err) {
-      res.sendStatus(500)
+      res.sendStatus(httpCode.INTERNAL_SERVER_ERROR);
     }else {
       res.send({
-        status: 200
-      })
+        status: httpCode.OK
+      });
     }
   });
 };

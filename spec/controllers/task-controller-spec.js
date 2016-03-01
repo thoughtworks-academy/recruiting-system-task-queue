@@ -1,9 +1,10 @@
 'use strict';
 
 var TaskController = require('../../controllers/task-controller');
-var yamlConfig = require('node-yaml-config');
 var request = require('superagent');
 var client = require('../../models/index');
+var httpCode = require('../../mixin/constant').httpCode;
+
 
 describe('TaskController', function () {
   describe('createTask', function () {
@@ -30,7 +31,7 @@ describe('TaskController', function () {
           },
           end: function (callback) {
             callback(null, {
-              status: 200
+              status: httpCode.OK
             });
           }
         };
@@ -47,17 +48,17 @@ describe('TaskController', function () {
         }
       },{
         sendStatus: function(status) {
-          done()
+          done();
         },
         send: function(data) {
           expect(data).toEqual({
-            status: 200
+            status: httpCode.OK
           });
-          done()
+          done();
         }
       });
 
-      expect(foo.setBar).toHaveBeenCalled()
+      expect(foo.setBar).toHaveBeenCalled();
     });
 
     it('return 500 when something was wrong', function (done) {
@@ -90,15 +91,15 @@ describe('TaskController', function () {
         }
       },{
         sendStatus: function(status) {
-          expect(status).toEqual(500);
-          done()
+          expect(status).toEqual(httpCode.INTERNAL_SERVER_ERROR);
+          done();
         },
         send: function(data) {
-          done()
+          done();
         }
       });
 
-      expect(foo.setBar).toHaveBeenCalled()
+      expect(foo.setBar).toHaveBeenCalled();
     });
 
   });
@@ -141,7 +142,7 @@ describe('TaskController', function () {
           },
           end: function (callback) {
             callback(null, {
-              status: 200
+              status: httpCode.OK
             });
           }
         };
@@ -153,18 +154,18 @@ describe('TaskController', function () {
         },
         body: {
           result: 1,
-          job_name: 'TASK-QUEUE',
-          build_number: 15
+          jobName: 'TASK-QUEUE',
+          buildNumber: 15
         }
       },{
         sendStatus: function(status) {
-          done()
+          done();
         },
         send: function(data) {
           expect(data).toEqual({
-            status: 200
+            status: httpCode.OK
           });
-          done()
+          done();
         }
       });
     });
@@ -194,21 +195,21 @@ describe('TaskController', function () {
         },
         body: {
           result: 1,
-          job_name: 'TASK-QUEUE',
-          build_number: 15
+          jobName: 'TASK-QUEUE',
+          buildNumber: 15
         }
       },{
         sendStatus: function(status) {
-          expect(status).toEqual(500);
-          done()
+          expect(status).toEqual(httpCode.INTERNAL_SERVER_ERROR);
+          done();
         },
         send: function(data) {
-          done()
+          done();
         }
       });
 
-      expect(foo.setBar).toHaveBeenCalled()
+      expect(foo.setBar).toHaveBeenCalled();
     });
 
-  })
+  });
 });
