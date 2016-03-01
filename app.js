@@ -3,9 +3,8 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-var redis = require('redis');
+var route = require('./routes/route');
 var yamlConfig = require('node-yaml-config');
-
 var config = yamlConfig.load('./config/config.yml');
 
 app.use(bodyParser.urlencoded({
@@ -14,28 +13,9 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 
-app.post('/tasks', (req, res) => {
-  var client = redis.createClient({
-    host: config.redisServerIp,
-    port: config.redisServerPort
-  });
+route.setRoutes(app);
 
-  client.set('homework_' + req.body.userId + '_' + req.body.quizId, JSON.stringify(req.body));
-
-  res.send({
-    status: 200
-  });
-});
-
-app.post('/task-result', (req, res) => {
-  console.log(req.body);
-
-  res.send({
-    status: 200
-  })
-});
-
-app.listen(config.port, function () {
+app.listen(config.port, () => {
   console.log('App listening at http://localhost:' + config.port);
 });
 

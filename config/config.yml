@@ -3,4 +3,6 @@ default:
   redisServerIp: '10.29.3.221'
   redisServerPort: '6379'
   CIServer: 'http://10.29.3.221:8080'
+  jobName: 'TASK-QUEUE'
   nginxServer: 'http://10.29.3.221:8888/fs'
+  taskServer: 'http://10.29.3.219'
