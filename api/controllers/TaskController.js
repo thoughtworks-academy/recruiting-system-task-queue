@@ -22,6 +22,14 @@ function updateTask(req, res) {
   });
 }
 
+function filterTask(req, res) {
+  //return res.send(JSON.parse(req.query.filter));
+  var filter = JSON.parse(req.query.filter);
+  Task.find().where(filter).exec((err, data) => {
+    res.send(data);
+  });
+}
+
 module.exports = {
   createTask: function (req, res) {
     var uniqId;
@@ -62,5 +70,6 @@ module.exports = {
       }
     })
   },
-  update: updateTask
+  update: updateTask,
+  filter: filterTask
 };

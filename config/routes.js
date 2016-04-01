@@ -36,7 +36,8 @@ module.exports.routes = {
     view: 'homepage'
   },
   'POST /tasks': 'TaskController.createTask',
-  'PUT /tasks/:uniqId/completion': 'TaskController.result',
+  'PUT /tasks/:uniqId': 'TaskController.update',
+  'GET /tasks' : 'TaskController.filter'
 
   /***************************************************************************
   *                                                                          *
