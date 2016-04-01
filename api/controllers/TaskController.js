@@ -6,7 +6,6 @@ var yamlConfig = require('node-yaml-config');
 var config = yamlConfig.load('./api/config/config.yml');
 var constant = require('../mixin/constant');
 
-
 function updateTask(req, res) {
   var uniqId = req.params.uniqId;
   async.waterfall([
