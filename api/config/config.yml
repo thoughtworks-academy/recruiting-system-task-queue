@@ -6,5 +6,5 @@ default:
   apiServer: 'http://localhost:8080/api'
   jobName: 'TASK-RUNNER'
   nginxServer: 'http://10.29.3.221:8888/fs'
-  taskServer: 'http://10.29.3.219'
+  taskServer: 'http://10.29.3.219:4000'
   database: 'mongodb://localhost/twars'

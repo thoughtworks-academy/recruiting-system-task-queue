@@ -1,10 +1,4 @@
-/**
- * Task.js
- *
- * @description :: TODO: You might write a short summary of how this model works and what it represents here.
- * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
- */
-
+var homeworkQuizzesStatus = require('../mixin/constant').homeworkQuizzesStatus;
 
 module.exports = {
 
@@ -13,7 +7,8 @@ module.exports = {
       type: 'string'
     },
     status: {
-      type: 'integer'
+      type: 'integer',
+      defaultsTo: homeworkQuizzesStatus.LINE_UP
     },
     version: {
       type: 'string'
@@ -25,6 +20,9 @@ module.exports = {
       type: 'integer'
     },
     homeworkDetail: {
+      type: 'string'
+    },
+    callbackURL: {
       type: 'string'
     }
   }
