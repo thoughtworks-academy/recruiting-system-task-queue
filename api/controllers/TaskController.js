@@ -1,5 +1,6 @@
 'use strict';
 
+var sails = require('sails');
 var request = require('superagent');
 var async = require('async');
 var yamlConfig = require('node-yaml-config');
@@ -12,20 +13,13 @@ function updateTask(req, res) {
       var uniqId = req.params.uniqId;
       Task.update(uniqId, req.body).exec(done);
     }
-    // ,
-    // (data, done) => {
-    //   request.post(data.callbackURL)
-    //       .set('Content-Type', 'application/json')
-    //       .send(data)
-    //       .end(done);
-    // }
   ], function (err, data){
+    console.log();
     res.send(data);
   });
 }
 
 function filterTask(req, res) {
-  //return res.send(JSON.parse(req.query.filter));
   var filter = JSON.parse(req.query.filter);
   Task.find().where(filter).exec((err, data) => {
     res.send(data);
