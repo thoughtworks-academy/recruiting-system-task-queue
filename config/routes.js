@@ -35,10 +35,11 @@ module.exports.routes = {
   '/': {
     view: 'homepage'
   },
-  'POST /tasks': 'TaskController.create',
-  'PUT /tasks/:uniqId': 'TaskController.update',
   'GET /tasks' : 'TaskController.filter',
-  'GET /tasks/:uniqId' : 'TaskController.findOne'
+  'GET /tasks/:uniqId': 'TaskController.findOne',
+  'POST /tasks': 'TaskController.create',
+  'PUT /tasks/:uniqId': 'TaskController.update'
+
 
   /***************************************************************************
   *                                                                          *

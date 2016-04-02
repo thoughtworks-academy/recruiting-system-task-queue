@@ -2,9 +2,8 @@ default:
   port: 4000
   redisServerIp: '10.29.3.221'
   redisServerPort: '6379'
-  CIServer: 'http://10.29.3.221:8080'
+  CIServer: 'http://192.168.33.10:8080'
   apiServer: 'http://localhost:8080/api'
-  jobName: 'TASK-RUNNER'
+  jobName: 'test-II'
   nginxServer: 'http://10.29.3.221:8888/fs'
-  taskServer: 'http://10.29.3.219:4000'
-  database: 'mongodb://localhost/twars'
+  taskServer: 'http://192.168.33.1:4000'

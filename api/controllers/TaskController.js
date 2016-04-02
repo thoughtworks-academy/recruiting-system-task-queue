@@ -11,13 +11,14 @@ function updateTask(req, res) {
     (done) => {
       var uniqId = req.params.uniqId;
       Task.update(uniqId, req.body).exec(done);
-    },
-    (data, done) => {
-      request.post(data.callbackURL)
-          .set('Content-Type', 'application/json')
-          .send(data)
-          .end(done);
     }
+    // ,
+    // (data, done) => {
+    //   request.post(data.callbackURL)
+    //       .set('Content-Type', 'application/json')
+    //       .send(data)
+    //       .end(done);
+    // }
   ], function (err, data){
     res.send(data);
   });
@@ -38,36 +39,34 @@ function findOneTask(req, res) {
 }
 
 function createTask(req, res) {
-  var uniqId;
+  var createJobStr = config.CIServer + '/job/' + config.jobName + '/buildWithParameters';
+
+  var created;
+
   async.waterfall([
     (done) => {
       Task.create(req.body).exec(done)
     },
-    (result, done) => {
-      uniqId = result.id;
-      var createJobStr = config.CIServer + '/job/' + config.jobName + '/buildWithParameters';
-      var callbackURL = config.taskServer + '/tasks/' + uniqId;
-
+    (data, done) => {
+      created = data;
+      var callbackURL = config.taskServer + '/tasks/' + data.id;
+      done(null, {
+        USER_REPO: req.body.userAnswerRepo,
+        CALLBACK_URL: callbackURL,
+        BRANCH: req.body.branch,
+        EVALUATE_SCRIPT_URL: config.nginxServer + req.body.evaluateScript
+      })
+    },
+    (data, done) => {
       request
           .post(createJobStr)
           .set('Content-Type', 'application/json')
-          .query({
-            USER_REPO: req.body.userAnswerRepo,
-            CALLBACK_URL: callbackURL,
-            BRANCH: req.body.branch,
-            EVALUATE_SCRIPT_URL: config.nginxServer + req.body.evaluateScript
-          })
+          .query(data)
           .end(done);
     }
   ], (err, data) => {
-    if (err) {
-      res.status(constant.httpCode.INTERNAL_SERVER_ERROR);
-      res.send(err.stack);
-    } else {
-      res.send({
-        uniqId: uniqId
-      });
-    }
+    if (err) {return next(req, res, err)}
+    res.send(created);
   })
 }
 

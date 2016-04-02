@@ -10,6 +10,9 @@ module.exports = {
       type: 'integer',
       defaultsTo: homeworkQuizzesStatus.LINE_UP
     },
+    result: {
+      type: 'string'
+    },
     version: {
       type: 'string'
     },

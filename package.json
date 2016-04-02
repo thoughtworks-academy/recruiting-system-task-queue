@@ -21,6 +21,7 @@
     "grunt-sync": "0.2.4",
     "include-all": "~0.1.6",
     "node-yaml-config": "0.0.4",
+    "nodemon": "^1.9.1",
     "rc": "1.0.1",
     "sails": "~0.12.1",
     "sails-disk": "~0.10.9",
@@ -29,7 +30,7 @@
   },
   "scripts": {
     "debug": "node debug app.js",
-    "start": "node app.js"
+    "start": "nodemon app"
   },
   "main": "app.js",
   "repository": {
