@@ -9,13 +9,26 @@ var constant = require('../mixin/constant');
 
 function updateTask(req, res) {
   async.waterfall([
+
     (done) => {
       var uniqId = req.params.uniqId;
       Task.update(uniqId, req.body).exec(done);
+    },
+
+    (data, done) => {
+      var callbackUrl = data[0].callbackUrl + '/' + data[0].id;
+
+      request
+        .put(callbackUrl)
+        .send(data[0])
+        .end(done)
     }
   ], function (err, data){
-    console.log();
-    res.send(data);
+    if(err) {
+      res.status(500).send(err.stack);
+    } else {
+      res.status(200).send();
+    }
   });
 }
 
@@ -41,6 +54,7 @@ function createTask(req, res) {
     (done) => {
       Task.create(req.body).exec(done)
     },
+
     (data, done) => {
       created = data;
       var callbackURL = config.taskServer + '/tasks/' + data.id;
@@ -51,6 +65,7 @@ function createTask(req, res) {
         EVALUATE_SCRIPT_URL: config.nginxServer + req.body.evaluateScript
       })
     },
+
     (data, done) => {
       request
           .post(createJobStr)
