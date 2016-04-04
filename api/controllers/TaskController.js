@@ -12,6 +12,8 @@ function updateTask(req, res) {
 
     (done) => {
       var uniqId = req.params.uniqId;
+      var data = req.body;
+      data.result = new Buffer(data.result || "", 'base64').toString('utf8');
       Task.update(uniqId, req.body).exec(done);
     },
 

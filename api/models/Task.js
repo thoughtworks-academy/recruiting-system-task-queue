@@ -11,7 +11,8 @@ module.exports = {
       defaultsTo: homeworkQuizzesStatus.LINE_UP
     },
     result: {
-      type: 'string'
+      type: 'string',
+      defaultsTo: "正在排队,请稍后......"  //当前没有执行结果
     },
     version: {
       type: 'string'
