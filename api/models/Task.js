@@ -3,7 +3,7 @@ var homeworkQuizzesStatus = require('../mixin/constant').homeworkQuizzesStatus;
 module.exports = {
 
   attributes: {
-    homeworkURL: {
+    userAnswerRepo: {
       type: 'string'
     },
     status: {

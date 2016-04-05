@@ -21,12 +21,12 @@ function updateTask(req, res) {
       var callbackUrl = data[0].callbackUrl + '/' + data[0].id;
 
       request
-        .put(callbackUrl)
-        .send(data[0])
-        .end(done)
+          .put(callbackUrl)
+          .send(data[0])
+          .end(done)
     }
-  ], function (err, data){
-    if(err) {
+  ], function (err, data) {
+    if (err) {
       res.status(500).send(err.stack);
     } else {
       res.status(200).send();
@@ -47,7 +47,7 @@ function findOneTask(req, res) {
   });
 }
 
-function createTask(req, res) {
+function createTask(req, res, next) {
   var createJobStr = config.CIServer + '/job/' + config.jobName + '/buildWithParameters';
 
   var created;
@@ -76,7 +76,10 @@ function createTask(req, res) {
           .end(done);
     }
   ], (err, data) => {
-    if (err) {return next(req, res, err)}
+    if (err) {
+      return res.status(500).send(err.stack);
+      //return next(req, res, err)
+    }
     res.send(created);
   })
 }
