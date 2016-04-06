@@ -8,7 +8,7 @@ module.exports = {
     },
     status: {
       type: 'integer',
-      defaultsTo: homeworkQuizzesStatus.LINE_UP
+      defaultsTo: homeworkQuizzesStatus.PROGRESS
     },
     result: {
       type: 'string',
