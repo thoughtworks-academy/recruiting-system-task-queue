@@ -18,7 +18,8 @@ module.exports = {
       type: 'string'
     },
     branch: {
-      type: 'string'
+      type: 'string',
+      defaultsTo: 'master'
     },
     commitTime: {
       type: 'integer'
