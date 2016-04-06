@@ -2,5 +2,5 @@ default:
   port: 4000
   CIServer: 'http://jenkins-nodejs:8080'
   jobName: 'TASK-RUNNER'
-  nginxServer: 'http://nginx:8888/fs'
+  nginxServer: 'http://nginx/fs'
   taskServer: 'http://node-task-queue:4000'
