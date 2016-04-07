@@ -38,7 +38,8 @@ module.exports.routes = {
   'GET /tasks' : 'TaskController.filter',
   'GET /tasks/:uniqId': 'TaskController.findOne',
   'POST /tasks': 'TaskController.create',
-  'PUT /tasks/:uniqId': 'TaskController.update'
+  'PUT /tasks/:uniqId': 'TaskController.update',
+  'GET /inspector': 'InspectorController.status'
 
 
   /***************************************************************************
