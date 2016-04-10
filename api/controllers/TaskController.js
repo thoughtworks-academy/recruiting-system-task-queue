@@ -77,8 +77,7 @@ function createTask(req, res, next) {
     }
   ], (err, data) => {
     if (err) {
-      return res.status(500).send(err.stack);
-      //return next(req, res, err)
+      return next(req, res, err);
     }
     res.send(created);
   })
